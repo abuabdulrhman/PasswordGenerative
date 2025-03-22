@@ -1,0 +1,19 @@
+﻿@model PasswordGenerative.Models.PasswordModel
+
+<div class="alert alert-info">
+    <h2>Random Password Generator</h2>
+</div>
+<form asp-action="Generate" method="post">
+    <label class="fonrm-control mb-3" for="Length">Password Length:</label>
+    <input class="form-control mb-3" type="number" id="Length" name="Length" value="@Model.Length" min="1" required />
+    <button class="btn btn-primary mb-4"  type="submit">Generate Password</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.GeneratedPassword))
+{
+    <h2>Generated Password: @Model.GeneratedPassword</h2>
+}
+@if (ViewBag.ErrorLength is not null)
+{
+    <div class="alert alert-danger"><h6>@ViewBag.ErrorLength</h6></div>
+}
