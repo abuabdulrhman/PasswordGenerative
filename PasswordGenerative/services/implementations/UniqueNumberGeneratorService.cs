@@ -27,32 +27,25 @@ namespace PasswordGenerative.services.implementations
 
         public string GenerateUniqueNumbersNotStartWithZero(int maxLength)
         {
-            const string validDigits = "123456789"; // لا نسمح بـ 0 كبداية
+            const string validDigits = "123456789"; 
             StringBuilder result = new StringBuilder();
             Random random = new Random();
-            HashSet<char> usedChars = new HashSet<char>();
-
-            // اختار رقم عشوائي غير صفر ليكون الرقم الأول
+            HashSet<char> usedChars = new HashSet<char>();          
             char firstDigit = validDigits[random.Next(validDigits.Length)];
             result.Append(firstDigit);
             usedChars.Add(firstDigit);
-
-            // نستخدم 0 كجزء من الأرقام المتاحة للخيارات التالية
+          
             const string remainingDigits = "0123456789";
-
-            // استمر في إنشاء الأرقام حتى نصل إلى الحد الأقصى
+       
             while (result.Length < maxLength)
             {
-                char randomDigit = remainingDigits[random.Next(remainingDigits.Length)];
-
-                // تحقق مما إذا كان الرقم قد تم استخدامه مسبقًا
+                char randomDigit = remainingDigits[random.Next(remainingDigits.Length)];            
                 if (!usedChars.Contains(randomDigit))
                 {
                     usedChars.Add(randomDigit);
                     result.Append(randomDigit);
                 }
             }
-
             return result.ToString();
         }
     }
